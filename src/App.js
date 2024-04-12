@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 import "./App.css";
+import { FaS } from "react-icons/fa6";
 
 function App() {
   const [recipe, setRecipe] = useState("");
@@ -39,14 +40,15 @@ function App() {
   return (
     <div className="App">
       <div className="search-bar">
-        <input
+       
+        <input 
           className="input"
           type="text"
           placeholder="Search for recipe"
           // to get event from handleChange
           onChange={(e) => handleChange(e)}
           onKeyUp={(e) => detectKey(e)}
-        ></input>
+        ></input>  
       </div>
 
       <div className="display">

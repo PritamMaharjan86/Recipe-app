@@ -7,6 +7,15 @@
   pointer-events: none;
 }
 
+.input
+{
+height: 30px;
+border-radius: 10px;
+margin-top: 5px;
+background-color: rgb(230, 230, 230);
+
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -26,6 +35,13 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.board{
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; 
+  width:100%;
 }
 
 @keyframes App-logo-spin {
