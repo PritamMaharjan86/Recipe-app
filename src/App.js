@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
+
 import "./App.css";
-import { FaS } from "react-icons/fa6";
+import Loader from "./components/loader";
 
 function App() {
   const [recipe, setRecipe] = useState("");
   const [output, setOutput] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setRecipe(e.target.value);
@@ -19,6 +20,7 @@ function App() {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     // calling API with headers
     const api_url = `https://api.api-ninjas.com/v1/recipe?query=${recipe}`;
     try {
@@ -32,23 +34,29 @@ function App() {
       const data = await response.json();
 
       setOutput(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   console.log("output", output);
   return (
     <div className="App">
       <div className="search-bar">
-       
-        <input 
+        <input
           className="input"
           type="text"
           placeholder="Search for recipe"
           // to get event from handleChange
           onChange={(e) => handleChange(e)}
           onKeyUp={(e) => detectKey(e)}
-        ></input>  
+        ></input>
+        {loading && (
+          <div className="blur-background">
+            <Loader />
+          </div>
+        )}
       </div>
 
       <div className="display">
