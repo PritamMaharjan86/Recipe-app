@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import "./App.css";
 import Loader from "./components/loader";
+import RegistrationForm from "./components/register";
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
 
 function App() {
   const [recipe, setRecipe] = useState("");
@@ -43,6 +46,8 @@ function App() {
   console.log("output", output);
   return (
     <div className="App">
+
+
       <div className="search-bar">
         <input
           className="input"
