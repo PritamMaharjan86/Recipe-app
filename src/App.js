@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Loader from "./components/loader";
 import RegistrationForm from "./components/register";
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 function App() {
   const [recipe, setRecipe] = useState("");
@@ -46,8 +45,6 @@ function App() {
   console.log("output", output);
   return (
     <div className="App">
-
-
       <div className="search-bar">
         <input
           className="input"
@@ -64,19 +61,24 @@ function App() {
         )}
       </div>
 
-      <div className="display">
-        <h2>Recipes</h2>
+      <div className="recipes">
+        <h1>Recipes</h1>
 
-        {console.log(output)}
         {output.map((data, index) => {
           return (
             <>
               <div className="board" key={index}>
-                <span>Title: {data.title}</span>
+                <span><h2>{data.title} </h2></span>
                 <br />
-                <span>Ingredients: {data.ingredients}</span>
+                <span>
+                  Ingredients</span>
+                  <div>
+                  {data.ingredients.split("|").map((i, index) => (
+                    <li key={index}>{i}</li>
+                  ))}
+                </div>
                 <br />
-                <p>Instructions: {data.instructions}</p>
+                <span>Instructions </span>{data.instructions}
                 <br />
               </div>
               <br />
