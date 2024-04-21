@@ -1,0 +1,93 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.1.1",
+        "title": "Eightstorm API Documentation",
+        "description": "Restful API Documentation for eightstorm",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Eightstorm",
+            "description": "API Documentation Eightstorm"
+        }
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization",
+            "description": "      Enter the token with the `Bearer: ` prefix, e.g. Bearer abcde12345"
+        }
+    },
+    "paths": {
+        "/api/auth/create-user": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "body",
+                        "required": true,
+                        "description": "Username for the new user.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "required": true,
+                        "description": "Password for the new user.",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Create new user",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/CreateUser"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "Username/Password for the new user.",
+                        "example": {
+                            "username": "",
+                            "password": ""
+                        }
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
+        }
+    }
+}

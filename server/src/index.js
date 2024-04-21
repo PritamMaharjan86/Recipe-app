@@ -14,6 +14,14 @@ app.use(cors());
 app.use(express.json());
 // app.use('/api/reminders');
 
+
+import swaggerUi from 'swagger-ui-express';
+
+import swaggerDoc from './swagger.json' assert {type: 'json'};
+
+//swagger will run on localhost:3000/api-docs
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
 app.use('/api/auth', authRoutes);
 
 
