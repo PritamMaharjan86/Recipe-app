@@ -1,0 +1,27 @@
+{
+  "name": "recipe-app-server",
+  "version": "1.0.0",
+  "description": "backend server for recipe app",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=dev nodemon --watch .env --watch src --exec babel-node src --source-maps",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aashish",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli" : "^7.24.1",
+    "@babel/core" : "^7.24.3",
+    "@babel/node" : "^7.23.9",
+    "@babel/preset-env": "^7.24.3",
+    "nodemon" : "^3.1.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.6",
+    "nodemon": "^3.1.0"
+  }
+}
