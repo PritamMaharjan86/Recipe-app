@@ -4,6 +4,7 @@ import cors from 'cors';
 import './env.js';
 import './db.js';
 import config from './config.js';
+import * as errorHandler from './middleware/errorHandler.js';
 
 import authRoutes from './routes/auth.js';
 
@@ -24,6 +25,10 @@ app.get('/', (req, res) => {
         version: '0.0.1'
     });
 });
+
+// Error Middleware
+app.use(errorHandler.genericErrorHandler);
+app.use(errorHandler.methodNotAllowed);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
