@@ -8,6 +8,9 @@ import * as errorHandler from './middleware/errorHandler.js';
 
 import authRoutes from './routes/auth.js';
 
+import logIncomingRequest from './middleware/loggerMiddleware.js';
+import logger from './logger.js'; // Import the logger
+
 const app = express();
 
 app.use(cors());
@@ -21,6 +24,7 @@ import swaggerDoc from './swagger.json' assert {type: 'json'};
 
 //swagger will run on localhost:3000/api-docs
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use(logIncomingRequest);
 
 app.use('/api/auth', authRoutes);
 
@@ -39,5 +43,5 @@ app.use(errorHandler.methodNotAllowed);
 const PORT = config.app.port;
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    logger.info(`Server running on http://localhost:${PORT}`);
 });
