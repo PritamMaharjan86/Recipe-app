@@ -13,8 +13,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // app.use('/api/reminders');
-const port = 3001;
-
 
 app.use('/api/auth', authRoutes);
 
@@ -30,6 +28,8 @@ app.get('/', (req, res) => {
 app.use(errorHandler.genericErrorHandler);
 app.use(errorHandler.methodNotAllowed);
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+const PORT = config.app.port;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

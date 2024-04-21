@@ -7,13 +7,9 @@ import sha1 from "sha1";
 
 var SALT = process.env.SALT_KEY;
 
-export const comparePassword = (password, userPassword) => {
-  const pass = sha1(SALT + password);
-  if (pass === userPassword) {
-    return true;
-  }ƒ
-  return false;
-};
+export const comparePassword = (password, hash) => {
+  return bcrypt.compare(password, hash);
+}
 
 export const generateToken = (data, expiryTime) => {
   return jwt.sign(
