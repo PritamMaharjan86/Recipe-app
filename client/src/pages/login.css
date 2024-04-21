@@ -2,14 +2,45 @@
   margin-top: 10px;
   padding-top: 35px;
   padding-left: 30px;
+  padding-right: 30px;
   padding-bottom: 35px;
   background-color: white;
   border-radius: 15px;
+  display: flex;
+  width: 50%;
+}
+
+.background
+{
+  display: flex;
 }
 
 h5 {
   margin-bottom: 5px;
   margin-top: 5px;
+  font-weight: normal;
+}
+
+h4 {
+  font-weight: normal;
+}
+
+.column1 {
+  flex: 1;
+}
+
+.column2 {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.image {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: contain;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  transform: rotate(-90deg);
 }
 
 .button_login {
