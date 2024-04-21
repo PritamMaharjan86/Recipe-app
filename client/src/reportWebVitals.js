@@ -1,13 +1,14 @@
-const reportWebVitals = onPerfEntry => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
-};
+import React, { useState, useEffect, Fragment } from "react";
 
-export default reportWebVitals;
+import "./App.css";
+import Routing from "./routes/route";
+
+function App() {
+  return (
+    <Fragment>
+      <Routing />
+    </Fragment>
+  );
+}
+
+export default App;
