@@ -1,0 +1,31 @@
+.login {
+  margin-top: 10px;
+  padding-top: 35px;
+  padding-left: 30px;
+  padding-bottom: 35px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+h5 {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.button_login {
+  margin-left: 70px;
+  margin-top: 20px;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 40px;
+  border-radius: 30px;
+  background-color: rgb(216 133 163);
+  color: white;
+}
+
+.login_detail {
+  background-color: rgb(192 219 234);
+  padding: 10px;
+  width: 200px;
+  margin-bottom: 10px;
+}
