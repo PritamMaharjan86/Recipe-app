@@ -1,4 +1,10 @@
 const config = {
+  app: {
+    port: process.env.PORT,
+    saltKey: process.env.SALT_KEY,
+    refreshTokenExpiryInMinute: process.env.REFRESH_TOKEN_EXPIRY_IN_MINUTE, // 1 day
+    accessTokenExpiryInMinute: process.env.ACCESS_TOKEN_EXPIRY_IN_MINUTE
+  },
   db: {
     connection: {
       host: process.env.DB_HOST,
