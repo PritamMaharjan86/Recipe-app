@@ -54,7 +54,7 @@ export const login = async (user) => {
         throw new AuthenticationError('Not Authorized');
     }
     const userAccount = rows[0];
-    if (!security.comparePassword(user.password, userAccount.password)) {
+    if (!await security.comparePassword(user.password, userAccount.password)) {
         throw new AuthenticationError('Username or Password mismatched');
     }
 
