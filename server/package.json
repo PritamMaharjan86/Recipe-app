@@ -10,17 +10,20 @@
   "author": "Aashish",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli" : "^7.24.1",
-    "@babel/core" : "^7.24.3",
-    "@babel/node" : "^7.23.9",
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.3",
+    "@babel/node": "^7.23.9",
     "@babel/preset-env": "^7.24.3",
-    "nodemon" : "^3.1.0"
+    "nodemon": "^3.1.0"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.9.6",
     "nodemon": "^3.1.0"
   }
