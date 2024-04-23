@@ -36,18 +36,14 @@
             "post": {
                 "parameters": [
                     {
-                        "name": "username",
+                        "name": "body",
                         "in": "body",
                         "required": true,
-                        "description": "Username for the new user.",
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "body",
-                        "required": true,
-                        "description": "Password for the new user.",
-                        "type": "string"
+                        "description": "Username/Password for the new user.",
+                        "example": {
+                            "username": "",
+                            "password": ""
+                        }
                     }
                 ],
                 "tags": [
@@ -56,10 +52,7 @@
                 "summary": "Create new user",
                 "responses": {
                     "200": {
-                        "description": "ok",
-                        "schema": {
-                            "$ref": "#/definitions/CreateUser"
-                        }
+                        "description": "ok"
                     }
                 }
             }
@@ -88,6 +81,32 @@
                     }
                 }
             }
+        },
+        "/api/user/update-user": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "Update user details",
+                        "example": {
+                            "id": "",
+                            "username": ""
+                        }
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user details",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
+
     }
 }
