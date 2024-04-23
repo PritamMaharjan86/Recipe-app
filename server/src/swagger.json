@@ -106,6 +106,32 @@
                     }
                 }
             }
+        },
+        "/api/recipe/favorite-recipe": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "save favorite recipe",
+                        "example": {
+                            "userId": "",
+                            "recipe_name_id": "",
+                            "recipe_id": ""
+                        }
+                    }
+                ],
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Save Favorite recipe",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
 
     }
