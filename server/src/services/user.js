@@ -47,19 +47,13 @@ export const getAllUsers = async ({ page, perPage, sortBy, sortDirection, search
 
 }
 
-export const updateUserDetails = async (userId, { firstName = '', lastName = '', dob = '', gender = '', email = '', phone = '', address = '', city = '', zipCode = '' }) => {
+export const updateUserDetails = async ({id,username}) => {
     const query = `UPDATE users SET 
-                        email           = '${email}',
-                        first_name      = '${firstName}',
-                        last_name       = '${lastName}',
-                        gender          = '${gender}',
-                        mobile_number   = '${phone}',
-                        address1        = '${address}',
-                        city            = '${city}',
-                        zip_code        = '${zipCode}' 
+                        username    = '${username}',
+                        updated_at  = NOW()          
                     WHERE 
-                        id = ${userId}`;
-
+                        id = ${id}`;
+    console.log('query', query);
     const [rows] = await pool.promise().query(query);
 
     return [rows];
