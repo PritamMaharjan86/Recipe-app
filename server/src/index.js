@@ -7,6 +7,7 @@ import config from './config.js';
 import * as errorHandler from './middleware/errorHandler.js';
 
 import authRoutes from './routes/auth.js';
+import userRoutes from './routes/user.js';
 
 import logIncomingRequest from './middleware/loggerMiddleware.js';
 import logger from './logger.js'; // Import the logger
@@ -27,6 +28,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use(logIncomingRequest);
 
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 
 app.get('/', (req, res) => {
