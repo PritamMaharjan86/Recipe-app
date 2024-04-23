@@ -9,6 +9,6 @@ const router = Router();
 /**
  * POST /auth/update-user
  */
-router.post('/update-user', userController.updateUser);
+router.post('/update-user', verifyToken, userController.updateUser);
 
 export default router;

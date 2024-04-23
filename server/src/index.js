@@ -8,6 +8,7 @@ import * as errorHandler from './middleware/errorHandler.js';
 
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';
+import recipeRoutes from './routes/recipe.js';
 
 import logIncomingRequest from './middleware/loggerMiddleware.js';
 import logger from './logger.js'; // Import the logger
@@ -29,6 +30,7 @@ app.use(logIncomingRequest);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/recipe', recipeRoutes);
 
 
 app.get('/', (req, res) => {

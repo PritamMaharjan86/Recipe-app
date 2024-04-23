@@ -20,3 +20,13 @@ CREATE TABLE `recipes_name` (
     `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 231638 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `recipe_app`.`favorites` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '	',
+  `userId` INT NULL,
+  `recipe_name_id` INT NULL,
+  `recipe_id` INT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`));
