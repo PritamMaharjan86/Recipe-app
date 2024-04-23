@@ -24,6 +24,13 @@ function Home() {
     }
   };
 
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
+
+
   const handleSubmit = async () => {
     setLoading(true);
     // calling API with headers
@@ -63,6 +70,10 @@ function Home() {
           </div>
         )}
       </div>
+
+      <button className="logout" type="submit" onClick={handleLogout}>
+          LOGOUT{" "}
+        </button>
 
       <div className="recipes">
         <h1>Recipes</h1>
