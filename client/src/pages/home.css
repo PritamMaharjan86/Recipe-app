@@ -45,6 +45,11 @@ body {
   animation: spin 2s linear infinite;
 }
 
+.logout
+{
+  background-color: wheat;
+}
+
 .board {
   border: 1px solid #ccc;
   padding: 10px;
@@ -54,16 +59,19 @@ body {
   line-height: 20px;
   word-spacing: 1px;
   letter-spacing: 0.2px;
+  color: white;
 }
 
 .board span {
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
+  color: white;
 }
 
 .board p {
   margin-top: 5px;
+  
 }
 
 @-webkit-keyframes spin {
