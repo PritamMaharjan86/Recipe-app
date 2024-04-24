@@ -16,6 +16,7 @@ body {
   border-radius: 10px;
   margin-top: 5px;
   background-color: rgb(230, 230, 230);
+
 }
 .blur-background {
   position: fixed;
@@ -47,7 +48,15 @@ body {
 
 .logout
 {
-  background-color: wheat;
+  background-color: 	#b23b3b;
+  height:30px;
+  width:80px;
+  border-radius: 10px;
+  float: right;
+  margin-top: 5px;
+  color: white;
+  border: none;
+  
 }
 
 .board {
