@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 
 import "./home.css";
@@ -69,11 +70,12 @@ function Home() {
             <Loader />
           </div>
         )}
+        <button className="logout" type="submit" onClick={handleLogout}>
+          LOG OUT{" "}
+        </button>
       </div>
 
-      <button className="logout" type="submit" onClick={handleLogout}>
-          LOGOUT{" "}
-        </button>
+
 
       <div className="recipes">
         <h1>Recipes</h1>
