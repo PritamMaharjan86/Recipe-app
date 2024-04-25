@@ -1,14 +1,17 @@
-
 import React, { useState, useEffect } from "react";
-
 import "./home.css";
 import Loader from "../components/loader";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 function Home() {
   const [recipe, setRecipe] = useState("");
   const [output, setOutput] = useState([]);
   const [loading, setLoading] = useState(false);
   const [like, setLike] = useState(false);
+
+
 
   const handleLike = (e) => {
     setLike(true);
@@ -17,11 +20,14 @@ function Home() {
   const handleChange = (e) => {
     setRecipe(e.target.value);
     console.log("recipe", recipe);
+
   };
 
   const detectKey = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
+
+
     }
   };
 
@@ -31,6 +37,10 @@ function Home() {
     window.location.reload();
   };
 
+
+  useEffect(() => {
+    toast.success("Successfully Logged In");
+  }, []);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -54,8 +64,12 @@ function Home() {
     }
   };
   console.log("output", output);
-  return (
+
+  return (<>
+    <ToastContainer />
+
     <div className="App">
+
       <div className="search-bar">
         <input
           className="input"
@@ -64,17 +78,20 @@ function Home() {
           // to get event from handleChange
           onChange={(e) => handleChange(e)}
           onKeyUp={(e) => detectKey(e)}
+
         ></input>
         {loading && (
           <div className="blur-background">
             <Loader />
+
           </div>
         )}
-        <button className="logout" type="submit" onClick={handleLogout}>
+        <button className="logout" type="submit" onClick={handleLogout} >
           LOG OUT{" "}
         </button>
-      </div>
 
+
+      </div>
 
 
       <div className="recipes">
@@ -87,6 +104,7 @@ function Home() {
                 <button onClick={handleLike}>{like ? "Unlike" : "Like"}</button>
               </div>
               <div className="board" key={index}>
+
                 <span>
                   <h2>{data.title} </h2>
                 </span>
@@ -107,7 +125,7 @@ function Home() {
           );
         })}
       </div>
-    </div>
+    </div></>
   );
 }
 
