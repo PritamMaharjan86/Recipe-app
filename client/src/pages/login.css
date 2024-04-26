@@ -17,7 +17,7 @@
   background-color: #f7f8f9;
   border-radius: 15px;
   width: 500px;
-  height: 300px;
+  height: auto;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -83,6 +83,14 @@ h4 {
   width: 200px;
   margin-bottom: 10px;
   border: 0px;
+}
+
+.create_acc {
+  padding-top: 20px;
+  background: none;
+  border: 0px;
+  margin: auto;
+  display: block;
 }
 
 @media screen and (max-width: 980px) {
