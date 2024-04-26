@@ -2,8 +2,8 @@
     "swagger": "2.0",
     "info": {
         "version": "0.1.1",
-        "title": "Eightstorm API Documentation",
-        "description": "Restful API Documentation for eightstorm",
+        "title": "Recipe App API Documentation",
+        "description": "Restful API Documentation for recipe-app",
         "license": {
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
@@ -12,8 +12,8 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "Eightstorm",
-            "description": "API Documentation Eightstorm"
+            "name": "Recipe App",
+            "description": "API Documentation Recipe App"
         }
     ],
     "produces": [
