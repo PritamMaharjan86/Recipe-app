@@ -16,7 +16,7 @@ function Login() {
 
   const isDisabled = !username || !password;
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,8 +27,8 @@ function Login() {
       if (response.data.accessToken) {
         localStorage.setItem('token', response.data.accessToken)
         setIsLoggedIn(true);
-      
-            }
+
+      }
     } catch (error) {
       console.error(error.response);
       incorrect();
@@ -44,46 +44,50 @@ function Login() {
 
   return (
     <div className="container">
-    <div className="login">
-      <div className="column1">
-        <img
-          className="logo"
-          src="https://res.cloudinary.com/dvmumi2mb/image/upload/v1713698554/recipe_pcnsla.png"
-        ></img>
-        <h4>Welcome back !!!</h4>
-        <h1>Log In</h1>
-        <input
-          className="login_detail"
-          type="text"
-          placeholder="Username"
-          value={username}
-          autoComplete="off"
-          onChange={(e) => setUsername(e.target.value)}
-        ></input>{" "}
-        <br />
-        <input
-          className="login_detail"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="off"
-        ></input>{" "}
-        <br />
-        <button className="button_login" type="submit" onClick={handleSubmit} disabled={isDisabled}>
-          LOGIN{" "}
-        </button>
-        <ToastContainer />
+      <div className="login">
+        <div className="column1">
+          <img
+            className="logo"
+            src="https://res.cloudinary.com/dvmumi2mb/image/upload/v1713698554/recipe_pcnsla.png"
+          ></img>
+          <h4>Welcome back !!!</h4>
+          <h1>Log In</h1>
+          <input
+            className="login_detail"
+            type="text"
+            placeholder="Username"
+            value={username}
+            autoComplete="off"
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>{" "}
+          <br />
+          <input
+            className="login_detail"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="off"
+          ></input>{" "}
+          <br />
 
-      </div>
+          <button className="button_login" type="submit" onClick={handleSubmit} disabled={isDisabled}>
+            LOGIN{" "}
+          </button>
+          <button className="create_acc"  onClick={() => navigate('/register')} >
+            Create account
+          </button>
+          <ToastContainer />
 
-      <div className="column2">
-        <img
-          className="image"
-          src="https://res.cloudinary.com/dvmumi2mb/image/upload/v1712205911/cld-sample-4.jpg"
-        ></img>
+        </div>
+
+        <div className="column2">
+          <img
+            className="image"
+            src="https://res.cloudinary.com/dvmumi2mb/image/upload/v1712205911/cld-sample-4.jpg"
+          ></img>
+        </div>
       </div>
-    </div>
     </div>
   );
 }
