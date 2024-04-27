@@ -11,4 +11,9 @@ const router = Router();
  */
 router.post('/favorite-recipe', recipeController.favoriteRecipe);
 
+/**
+ * GET /recipe/get-favorite-recipe
+ */
+router.get('/get-favorite-recipe/:userId', recipeController.getFavoriteRecipe);
+
 export default router;

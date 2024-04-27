@@ -132,6 +132,30 @@
                     }
                 }
             }
+        },
+        "/api/recipe/get-favorite-recipe/{userId}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "description": "GET favorite recipe",
+                        "example": {
+                            "userId": ""
+                        }
+                    }
+                ],
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "GET Favorite recipe",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
 
     }
