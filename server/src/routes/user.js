@@ -11,4 +11,12 @@ const router = Router();
  */
 router.post('/update-user', verifyToken, userController.updateUser);
 
+
+
+/**
+ * GET /auth/get-user-deatils
+ */
+router.get('/get-user-details/:userId', verifyToken, userController.getUserDetail);
+
+
 export default router;

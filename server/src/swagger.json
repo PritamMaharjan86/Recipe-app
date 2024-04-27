@@ -156,6 +156,35 @@
                     }
                 }
             }
+        },
+        "/api/user/get-user-details/{userId}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "description": "GET user deatils",
+                        "example": {
+                            "userId": ""
+                        }
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "GET user deatils",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
 
     }
