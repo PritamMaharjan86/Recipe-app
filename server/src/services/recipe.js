@@ -18,3 +18,16 @@ export const favoriteRecipe = async ({userId, recipe_name_id, recipe_id}) => {
 
     return [rows];
 };
+/**
+ *
+ * @param {*} user
+ * @returns
+ */
+export const getFavoriteRecipe = async (userId) => {
+
+   const query = `SELECT * FROM favorites WHERE userId = ${userId}`;
+
+    const [rows] = await pool.promise().query(query);
+
+    return [rows];
+};
