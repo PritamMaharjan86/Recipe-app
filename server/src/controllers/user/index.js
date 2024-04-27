@@ -17,3 +17,20 @@ export async function updateUser(req, res, next) {
         next(err);
     }
 }
+
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+export async function getUserDetail(req, res, next) {
+    try {
+        const data = await userService.getUserDetail(req.params.userId);
+        return res.status(HttpStatus.OK).json(data);
+    } catch (err) {
+        next(err);
+    }
+}
