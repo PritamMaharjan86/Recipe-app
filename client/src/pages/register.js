@@ -31,7 +31,7 @@ export default function Register() {
             setIsLoggedIn(true);
 
         } catch (error) {
-            toast.error(error.response.data.error.message);
+            toast.error(error.response.data.error.message); //path to get data from api
             console.error(error.response);
 
         }
@@ -41,7 +41,7 @@ export default function Register() {
     useEffect(() => {
         if (isLoggedIn) {
             console.log('isloggedin', isLoggedIn)
-            navigate('/home');
+            navigate('/home'); //navigate to home page 
         }
     }, [isLoggedIn])
 
