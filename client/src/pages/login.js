@@ -12,8 +12,6 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const incorrect = () => toast.error("Password Incorrect!");
-
   const isDisabled = !username || !password;
 
 
@@ -30,8 +28,8 @@ function Login() {
 
       }
     } catch (error) {
-      console.error(error.response);
-      incorrect();
+      console.log(error.response);
+      toast.error(error.response.data.error.message); //path to get data from api
     }
   };
 
