@@ -1,10 +1,10 @@
+
 .register {
   margin-top: 10px;
   padding-top: 35px;
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 35px;
-  background-color: #f7f8f9;
   border-radius: 15px;
   width: 500px;
   height: 70vh;
@@ -13,22 +13,46 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  background-image: url("https://res.cloudinary.com/dvmumi2mb/image/upload/v1712205907/samples/chair-and-coffee-table.jpg");
+  background-size: cover;
 }
-.name_register
+.name_register {
+  height: 30px;
+  width: 70%;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.name_register::placeholder
 {
-    height: 30px;
-    width:50%;
-    margin: 10px;
+    color: rgba(3, 3, 3, 0.7);
+}
+ 
+
+.password_register {
+  height: 30px;
+  width: 70%;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
-.email_register{
-    height: 30px;
-    width:50%;
-    margin: 10px;
+.password_register::placeholder
+{
+    color: rgba(3, 3, 3, 0.7);
 }
+ 
 
-.password_register{
-    height: 30px;
-    width:50%;
-    margin: 10px;
+.register_button {
+  height: 30px;
+  width: 70%;
+  border: none;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  padding: 5px;
 }
