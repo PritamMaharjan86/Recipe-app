@@ -11,7 +11,16 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [like, setLike] = useState(false);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('');
 
+
+  const username = localStorage.getItem('username');
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setIsOpen(false);
+  };
 
   const handleLike = (e) => {
     setLike(true);
@@ -70,6 +79,20 @@ function Home() {
 
     <div className="App">
 
+
+      <div>
+      <button className="user" onClick={() => setIsOpen(!isOpen)} className="dropdown-toggle">
+      {username}
+      </button>
+      {isOpen && (
+        <div className="dropdown-menu">
+          <button onClick={() => handleOptionClick('edit')}>Edit Profile</button>
+         
+        </div>
+      )}
+     
+    </div>
+
       <div className="search-bar">
         <input
           className="input"
@@ -86,9 +109,11 @@ function Home() {
 
           </div>
         )}
+
         <button className="logout" type="submit" onClick={handleLogout} >
           LOG OUT{" "}
         </button>
+
 
 
       </div>
