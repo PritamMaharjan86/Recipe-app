@@ -1,0 +1,17 @@
+.profile {
+    margin-top: 10px;
+    padding-top: 35px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 35px;
+    border-radius: 15px;
+    width: 500px;
+    height: 70vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-image: url("https://res.cloudinary.com/dvmumi2mb/image/upload/v1712205907/samples/chair-and-coffee-table.jpg");
+    background-size: cover;
+  }
