@@ -91,7 +91,6 @@
                         "required": true,
                         "description": "Update user details",
                         "example": {
-                            "id": "",
                             "username": "",
                             "currentPassword": "",
                             "newPassword" : ""

@@ -11,7 +11,7 @@ import * as userService from '../../services/user.js';
  */
 export async function updateUser(req, res, next) {
     try {
-        const data = await userService.updateUserDetails(req.body);
+        const data = await userService.updateUserDetails(req.user,req.body);
         return res.status(HttpStatus.OK).json(data);
     } catch (err) {
         next(err);

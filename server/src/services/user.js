@@ -50,9 +50,9 @@ export const getAllUsers = async ({ page, perPage, sortBy, sortDirection, search
 
 }
 
-export const updateUserDetails = async ({ id, username, currentPassword, newPassword }) => {
-    if (id && username && currentPassword && newPassword) {
-        const getUserPassword = `SELECT password FROM users WHERE id = ${id}`;
+export const updateUserDetails = async (user, { username, currentPassword, newPassword }) => {
+    if (user.id && username && currentPassword && newPassword) {
+        const getUserPassword = `SELECT password FROM users WHERE id = ${user.id}`;
 
         const [res] = await pool.promise().query(getUserPassword);
 
