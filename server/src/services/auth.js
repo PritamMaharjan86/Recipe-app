@@ -17,7 +17,7 @@ export const createUser = async (user) => {
 
     const [checkUsername] = await pool.promise().query(checkUsernameQuery);
 
-    if(!checkUsername.length){
+    if (!checkUsername.length) {
         if (user.username && user.password) {
             return new Promise((resolve, reject) => {
                 return bcrypt.hash(user.password, 5, async (err, hash) => {
@@ -28,7 +28,7 @@ export const createUser = async (user) => {
                     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
                     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var dateTime = date + ' ' + time;
-    
+
                     const query = `INSERT INTO users
             (
               username,
@@ -48,7 +48,7 @@ export const createUser = async (user) => {
                 });
             });
         }
-    }else{
+    } else {
         throw new AuthenticationError('Username already exists.');
     }
 };
