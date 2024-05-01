@@ -92,7 +92,9 @@
                         "description": "Update user details",
                         "example": {
                             "id": "",
-                            "username": ""
+                            "username": "",
+                            "currentPassword": "",
+                            "newPassword" : ""
                         }
                     }
                 ],
