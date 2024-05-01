@@ -1,6 +1,9 @@
 import mysql from 'mysql2';
 
 import pool from '../db.js';
+import bcrypt from "bcrypt";
+
+import * as security from '../utils/security.js';
 
 export const getUserDetail = async (id) => {
     const query = `SELECT * FROM users where id=${mysql.escape(id)}`;
@@ -47,16 +50,45 @@ export const getAllUsers = async ({ page, perPage, sortBy, sortDirection, search
 
 }
 
-export const updateUserDetails = async ({id,username}) => {
-    const query = `UPDATE users SET 
-                        username    = '${username}',
-                        updated_at  = NOW()          
-                    WHERE 
-                        id = ${id}`;
-    console.log('query', query);
-    const [rows] = await pool.promise().query(query);
+export const updateUserDetails = async ({ id, username, currentPassword, newPassword }) => {
+    if (id && username && currentPassword && newPassword) {
+        const getUserPassword = `SELECT password FROM users WHERE id = ${id}`;
 
-    return [rows];
+        const [res] = await pool.promise().query(getUserPassword);
+
+        const checkPassword = await security.comparePassword(currentPassword, res[0].password);
+
+        if (checkPassword) {
+            return new Promise((resolve, reject) => {
+                return bcrypt.hash(newPassword, 5, async (err, hash) => {
+
+                    if (err) {
+                        throw HttpStatus.BAD_REQUEST;
+                    }
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var dateTime = date + ' ' + time;
+
+                    const query = `UPDATE users SET 
+                                    username    = '${username}',
+                                    password    = '${hash}',
+                                    updated_at  = NOW()          
+                                WHERE 
+                                    id = ${id}`;
+
+                    const [result] = await pool.promise().query(query);
+
+                    return resolve(result.insertId);
+                });
+            });
+        } else {
+            return {
+                status: 202,
+                message: "Invalid Password"
+            }
+        }
+    }
 }
 
 export const searchUser = async ({ searchTerm }) => {
