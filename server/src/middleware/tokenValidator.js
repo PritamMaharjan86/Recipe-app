@@ -20,7 +20,7 @@ export const verifyToken = async (req, res, next) => {
     try {
         decryptedToken = security.decrypt(token).encryptedData;
         req.user = await getUserDetail(decryptedToken.id);
-
+        
         return next();
     } catch (err) {
         return next(new AuthenticationError('Not Authorized'));
