@@ -13,39 +13,50 @@ import AuthenticationError from '../errors/authentication.js';
  * @returns
  */
 export const createUser = async (user) => {
-    if (user.username && user.password) {
-        return new Promise((resolve, reject) => {
-            return bcrypt.hash(user.password, 5, async (err, hash) => {
-                if (err) {
-                    throw HttpStatus.BAD_REQUEST;
-                }
-                var today = new Date();
-                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                var dateTime = date + ' ' + time;
+    const checkUsernameQuery = `SELECT username FROM users where username = '${user.username}'`;
 
-                const query = `INSERT INTO users
-        (
-          username,
-          password,
-          created_at,
-          updated_at
-        )
-        VALUES
-        (
-          ${mysql.escape(user.username)},
-          ${mysql.escape(hash)},
-          ${mysql.escape(dateTime)},
-          ${mysql.escape(dateTime)}
-        );`;
-                const [result] = await pool.promise().query(query);
-                return resolve(result.insertId);
+    const [checkUsername] = await pool.promise().query(checkUsernameQuery);
+
+    if(!checkUsername.length){
+        if (user.username && user.password) {
+            return new Promise((resolve, reject) => {
+                return bcrypt.hash(user.password, 5, async (err, hash) => {
+                    if (err) {
+                        throw HttpStatus.BAD_REQUEST;
+                    }
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var dateTime = date + ' ' + time;
+    
+                    const query = `INSERT INTO users
+            (
+              username,
+              password,
+              created_at,
+              updated_at
+            )
+            VALUES
+            (
+              ${mysql.escape(user.username)},
+              ${mysql.escape(hash)},
+              ${mysql.escape(dateTime)},
+              ${mysql.escape(dateTime)}
+            );`;
+                    const [result] = await pool.promise().query(query);
+                    return resolve(result.insertId);
+                });
             });
-        });
+        }
+    }else{
+        throw new AuthenticationError('Username already exists.');
     }
 };
 
 export const login = async (user) => {
+
+
+
     const query = `SELECT id, username, password from users WHERE username= ${mysql.escape(user.username)}`;
 
     const [rows] = await pool.promise().query(query);
