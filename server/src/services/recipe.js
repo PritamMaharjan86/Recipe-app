@@ -31,3 +31,19 @@ export const getFavoriteRecipe = async (userId) => {
 
     return [rows];
 };
+
+/**
+ *
+ * @param {*} user
+ * @returns
+ */
+export const addComment = async ({userId, recipe_id, comment}) => {
+    if(userId && recipe_id && comment){
+        const query = `INSERT INTO comments (recipe_id, user_id, comment, created_at, updated_at) VALUES (${recipe_id}, ${userId}, '${comment}', NOW(), NOW())`;
+ 
+        const [rows] = await pool.promise().query(query);
+    
+        return [rows];
+    }
+    
+ };

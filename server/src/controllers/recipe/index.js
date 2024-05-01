@@ -33,3 +33,19 @@ export async function getFavoriteRecipe(req, res, next) {
         next(err);
     }
 }
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+export async function addComment(req, res, next) {
+    try {
+        const data = await recipeService.addComment(req.body);
+        return res.status(HttpStatus.OK).json(data);
+    } catch (err) {
+        next(err);
+    }
+}
