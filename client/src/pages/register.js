@@ -50,9 +50,9 @@ export default function Register() {
         <>
             <ToastContainer />
             <div className="container">
-               
+
                 <div className="register">
-                
+
                     <div className="column1">
                         <img
                             className="logo"
@@ -60,7 +60,7 @@ export default function Register() {
                         ></img>
 
                         <h1>Register Here</h1>
-                       
+
                         <div><input className='name_register' placeholder='👤 Username' type='text' onChange={handleUsername}></input></div>
                         <div><input className='password_register' placeholder='🔒 Create password' type='password' onChange={handlePassword}></input></div>
                         <div><button className='register_button' type='submit' onClick={handleSubmit}>Register</button></div>
