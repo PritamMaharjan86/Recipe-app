@@ -186,6 +186,37 @@
                     }
                 }
             }
+        },
+        "/api/recipe/add-comment": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "POST comment",
+                        "example": {
+                            "recipe_id": "",
+                            "user_id": "",
+                            "comment": ""
+                        }
+                    }
+                ],
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "POST Comments",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
 
     }

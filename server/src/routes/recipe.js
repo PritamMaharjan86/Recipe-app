@@ -16,4 +16,10 @@ router.post('/favorite-recipe', recipeController.favoriteRecipe);
  */
 router.get('/get-favorite-recipe/:userId', recipeController.getFavoriteRecipe);
 
+
+/**
+ * POST /recipe/add-comment
+ */
+router.post('/add-comment', recipeController.addComment);
+
 export default router;
