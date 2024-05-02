@@ -26,6 +26,6 @@ router.post('/add-comment', recipeController.addComment);
 /**
  * GET /recipe/get-all-recipe
  */
-router.get('/get-all-recipes', recipeController.getAllRecipe);
+router.post('/get-all-recipes', recipeController.getAllRecipe);
 
 export default router;

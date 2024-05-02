@@ -219,16 +219,27 @@
             }
         },
         "/api/recipe/get-all-recipes": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "Bearer": []
                     }
                 ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "GET all recipes by search term",
+                        "example": {
+                            "searchTerm": ""
+                        }
+                    }
+                ],
                 "tags": [
                     "Recipe"
                 ],
-                "summary": "get all recipes",
+                "summary": "GET all recipes by search term",
                 "responses": {
                     "200": {
                         "description": "ok"

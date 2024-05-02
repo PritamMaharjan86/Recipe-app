@@ -52,7 +52,7 @@ export const addComment = async ({userId, recipe_id, comment}) => {
  * @param {*} user
  * @returns
  */
-export const getAllRecipe = async () => {
+export const getAllRecipe = async ({searchTerm}) => {
         const query = `SELECT 
                             r.id,
                             r.recipe_name_id,
@@ -66,6 +66,7 @@ export const getAllRecipe = async () => {
                             recipes r
                                 LEFT JOIN
                             recipes_name rn ON r.recipe_name_id = rn.id
+                        WHERE rn.recipe_name LIKE '%${searchTerm}%'
                         LIMIT 50;`;
  
         const [rows] = await pool.promise().query(query);
