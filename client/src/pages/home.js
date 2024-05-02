@@ -256,20 +256,20 @@ function Home() {
                 <br />
                 <h2>Ingredients</h2>
                 <div>
-                  {data.ingredients.slice(1).split(",").map((i, index) => (
+                  {data.ingredients.slice(1, -1).split(",").map((i, index) => (
                     <li key={index}>{i}</li>
                   ))}
                 </div>
                 <br />
                 <h2>Instructions </h2>
-                {data.steps.slice(1).split(",").map((i, index) => (
+                {data.steps.slice(1, -1).split(",").map((i, index) => (
                     <li key={index}>{i}</li>
                   ))}
                 <br />
                 <br />
                 <h2>Description</h2>
                 <div>
-                  {data.description}
+                  {data.description.charAt(0).toUpperCase()+ data.description.slice(1)}
                 </div>
               </div>
 
