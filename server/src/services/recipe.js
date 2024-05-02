@@ -47,3 +47,29 @@ export const addComment = async ({userId, recipe_id, comment}) => {
     }
     
  };
+/**
+ *
+ * @param {*} user
+ * @returns
+ */
+export const getAllRecipe = async () => {
+        const query = `SELECT 
+                            r.id,
+                            r.recipe_name_id,
+                            rn.recipe_name,
+                            r.time_to_cook,
+                            r.steps,
+                            r.description,
+                            r.ingredients,
+                            r.image_link
+                        FROM
+                            recipes r
+                                LEFT JOIN
+                            recipes_name rn ON r.recipe_name_id = rn.id
+                        LIMIT 50;`;
+ 
+        const [rows] = await pool.promise().query(query);
+    
+        return [rows];
+    
+ };

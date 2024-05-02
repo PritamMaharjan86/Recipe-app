@@ -217,6 +217,24 @@
                     }
                 }
             }
+        },
+        "/api/recipe/get-all-recipes": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "get all recipes",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
 
     }
