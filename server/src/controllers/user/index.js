@@ -28,7 +28,24 @@ export async function updateUser(req, res, next) {
  */
 export async function getUserDetail(req, res, next) {
     try {
-        const data = await userService.getUserDetail(req.params.userId);
+        const data = await userService.getUserDetail(req.user);
+        return res.status(HttpStatus.OK).json(data);
+    } catch (err) {
+        next(err);
+    }
+}
+
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+export async function getUserDetails(req, res, next) {
+    try {
+        const data = await userService.getUserDetails(req.user);
         return res.status(HttpStatus.OK).json(data);
     } catch (err) {
         next(err);

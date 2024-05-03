@@ -3,14 +3,19 @@ import mysql from 'mysql2';
 import pool from '../db.js';
 import bcrypt from "bcrypt";
 
-import * as security from '../utils/security.js';
-
-export const getUserDetail = async (id) => {
-    const query = `SELECT * FROM users where id=${mysql.escape(id)}`;
+export const getUserDetail = async (userId) => {
+    const query = `SELECT * FROM users where id=${mysql.escape(userId)}`;
 
     const [rows] = await pool.promise().query(query);
-
     return [rows];
+}
+
+export const getUserDetails = async (user) => {
+    if(user){
+        const userDatas = [...user[0]];
+        return userDatas[0];
+    }
+   
 }
 
 export const getAllUsers = async ({ page, perPage, sortBy, sortDirection, searchText }) => {
