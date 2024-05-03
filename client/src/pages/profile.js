@@ -31,12 +31,12 @@ export default function Profile() {
                     newPassword: formData.password
                 },
                 {
-                    headers :{Authorization : `Bearer ${token}`}
+                    headers: { Authorization: `Bearer ${token}` }
                 });
             console.log(response);
             localStorage.removeItem('token');
             navigate('/');
-            
+
 
 
         } catch (error) {

@@ -20,38 +20,20 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 function Home() {
-  const [recipe, setRecipe] = useState("");
-  const [output, setOutput] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
-  const [like, setLike] = useState(false);
   const navigate = useNavigate();
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
-
-
+  const [recipes, setRecipes] = useState([]);
   const username = localStorage.getItem('username');
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-  };
-
-  const handleLike = (e) => {
-    setLike(true);
-  };
-
   const handleChange = (e) => {
-    setRecipe(e.target.value);
-    console.log("recipe", recipe);
+    setSearchTerm(e.target.value);
 
   };
 
   const detectKey = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
-
-
     }
   };
 
@@ -68,26 +50,21 @@ function Home() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    // calling API with headers
-    const api_url = `https://api.api-ninjas.com/v1/recipe?query=${recipe}`;
     try {
-      const response = await fetch(api_url, {
-        method: "get",
-        headers: {
-          "X-Api-Key": "6rZ6rEmt1bGPz9YUP31rPA==QK5ias8tqlCLrFxZ",
-        },
-      });
+      const response = await http.post('/recipe/get-all-recipes',
+        {
+          searchTerm
+        });
 
-      const data = await response.json();
-
-      setOutput(data);
+      console.log(response.data[0]);
+      setRecipes(response.data[0]);
       setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
-  console.log("output", output);
+  console.log("recipes", recipes);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -225,10 +202,10 @@ function Home() {
 
                       :
                       setting === 'Profile' ?
-                      <Typography textAlign="center" onClick={() => navigate('/profile')} >{setting}</Typography>
+                        <Typography textAlign="center" onClick={() => navigate('/profile')} >{setting}</Typography>
 
-                      :
-                      <Typography textAlign="center">{setting}</Typography>
+                        :
+                        <Typography textAlign="center">{setting}</Typography>
 
                   }
                 </MenuItem>
@@ -267,35 +244,41 @@ function Home() {
       <div className="recipes">
         <h1>Recipes</h1>
 
-        {output.map((data, index) => {
+        {recipes.map((data, index) => {
           return (
             <>
-              <div className="likeButton">
-                <button onClick={handleLike}>{like ? "Unlike" : "Like"}</button>
-              </div>
+
               <div className="board" key={index}>
 
                 <span>
-                  <h2>{data.title} </h2>
+                  <h2>{data.recipe_name.toUpperCase()} </h2>
                 </span>
                 <br />
-                <span>Ingredients</span>
+                <h2>Ingredients</h2>
                 <div>
-                  {data.ingredients.split("|").map((i, index) => (
+                  {data.ingredients.slice(1, -1).split(",").map((i, index) => (
                     <li key={index}>{i}</li>
                   ))}
                 </div>
                 <br />
-                <span>Instructions </span>
-                {data.instructions}
+                <h2>Instructions </h2>
+                {data.steps.slice(1, -1).split(",").map((i, index) => (
+                    <li key={index}>{i}</li>
+                  ))}
                 <br />
+                <br />
+                <h2>Description</h2>
+                <div>
+                  {data.description.charAt(0).toUpperCase()+ data.description.slice(1)}
+                </div>
               </div>
-              <br />
+
             </>
           );
         })}
       </div>
     </div>
+
   </>
   );
 }

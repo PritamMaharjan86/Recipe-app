@@ -49,3 +49,18 @@ export async function addComment(req, res, next) {
         next(err);
     }
 }
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+export async function getAllRecipe(req, res, next) {
+    try {
+        const data = await recipeService.getAllRecipe(req.body);
+        return res.status(HttpStatus.OK).json(data);
+    } catch (err) {
+        next(err);
+    }
+}

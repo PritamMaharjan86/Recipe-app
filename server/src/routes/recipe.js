@@ -22,4 +22,10 @@ router.get('/get-favorite-recipe/:userId', recipeController.getFavoriteRecipe);
  */
 router.post('/add-comment', recipeController.addComment);
 
+
+/**
+ * GET /recipe/get-all-recipe
+ */
+router.post('/get-all-recipes', recipeController.getAllRecipe);
+
 export default router;
