@@ -1,0 +1,10 @@
+.comment_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 15px;
+}
+
+.comment {
+  margin: 5px;
+}
