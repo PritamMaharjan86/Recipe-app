@@ -6,6 +6,7 @@ import Register from "../pages/register"
 import PrivateRoute from "./privateRoute";
 import Profile from "../pages/profile";
 
+
 const Routing = () => {
   
   return (
@@ -15,6 +16,7 @@ const Routing = () => {
         <Route path="/home" element={<PrivateRoute component={Home}/>}/>
         <Route path="/register" element={<Register />}/>
         <Route path="/profile" element={<Profile />}/>
+
       </Routes>
 
     </BrowserRouter>

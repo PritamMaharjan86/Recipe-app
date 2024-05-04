@@ -4,7 +4,7 @@ import Loader from "../components/loader";
 import { ToastContainer, toast } from 'react-toastify';
 import http from "../pages/http";
 import { resolvePath, useNavigate } from 'react-router-dom';
-
+import Comment from "../components/comment";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +14,6 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -56,7 +55,7 @@ function Home() {
           searchTerm
         });
 
-      console.log(response.data[0]);
+
       setRecipes(response.data[0]);
       setLoading(false);
     } catch (error) {
@@ -64,7 +63,7 @@ function Home() {
       setLoading(false);
     }
   };
-  console.log("recipes", recipes);
+
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -263,16 +262,17 @@ function Home() {
                 <br />
                 <h2>Instructions </h2>
                 {data.steps.slice(1, -1).split(",").map((i, index) => (
-                    <li key={index}>{i}</li>
-                  ))}
+                  <li key={index}>{i}</li>
+                ))}
                 <br />
                 <br />
                 <h2>Description</h2>
                 <div>
-                  {data.description.charAt(0).toUpperCase()+ data.description.slice(1)}
+                  {data.description.charAt(0).toUpperCase() + data.description.slice(1)}
                 </div>
               </div>
 
+              <Comment recipe_name_id={data.recipe_name_id} user_id={data.id}/>
             </>
           );
         })}
