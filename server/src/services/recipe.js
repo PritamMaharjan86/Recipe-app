@@ -69,20 +69,37 @@ export const likeRecipe = async ({ userId, recipe_id }) => {
  */
 export const getAllRecipe = async ({ searchTerm }) => {
     const query = `SELECT 
-                            r.id,
-                            r.recipe_name_id,
-                            rn.recipe_name,
-                            r.time_to_cook,
-                            r.steps,
-                            r.description,
-                            r.ingredients,
-                            r.image_link
-                        FROM
-                            recipes r
-                                LEFT JOIN
-                            recipes_name rn ON r.recipe_name_id = rn.id
-                        WHERE rn.recipe_name LIKE '%${searchTerm}%'
-                        LIMIT 50;`;
+                        r.id,
+                        r.recipe_name_id,
+                        rn.recipe_name,
+                        r.time_to_cook,
+                        r.steps,
+                        r.description,
+                        r.ingredients,
+                        r.image_link,
+                        c.${`comment`},
+                        COUNT(l.id) AS likesCount
+                    FROM
+                        recipes r
+                        LEFT JOIN
+                        recipes_name rn ON r.recipe_name_id = rn.id
+                    LEFT JOIN 
+                        comments c ON c.recipe_id = r.id
+                    LEFT JOIN
+                        ${`like`} l ON l.recipe_id = r.id
+                    WHERE rn.recipe_name LIKE '%${searchTerm}%'
+                    GROUP BY
+                        r.id,
+                        r.recipe_name_id,
+                        rn.recipe_name,
+                        r.time_to_cook,
+                        r.steps,
+                        r.description,
+                        r.ingredients,
+                        r.image_link,
+                        c.${`comment`}
+                    LIMIT 50;`;
+
 
     const [rows] = await pool.promise().query(query);
 
