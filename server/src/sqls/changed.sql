@@ -40,3 +40,12 @@ CREATE TABLE `recipe_app`.`comments` (
     `updated_at` DATETIME NULL,
     PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `recipe_app`.`like` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NULL,
+    `recipe_id` INT NULL,
+    `created_at` DATETIME NULL,
+    `updated_at` DATETIME NULL,
+    PRIMARY KEY (`id`)
+);

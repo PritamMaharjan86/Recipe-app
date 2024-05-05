@@ -8,9 +8,9 @@ import pool from "../db.js";
  * @param {*} user
  * @returns
  */
-export const favoriteRecipe = async ({userId, recipe_name_id, recipe_id}) => {
+export const favoriteRecipe = async ({ userId, recipe_name_id, recipe_id }) => {
 
-   const query = `INSERT INTO favorites (userId, recipe_name_id, recipe_id, created_at, updated_at) 
+    const query = `INSERT INTO favorites (userId, recipe_name_id, recipe_id, created_at, updated_at) 
                         VALUES (${userId}, ${recipe_name_id}, ${recipe_id}, NOW(), NOW())
                     `;
 
@@ -25,7 +25,7 @@ export const favoriteRecipe = async ({userId, recipe_name_id, recipe_id}) => {
  */
 export const getFavoriteRecipe = async (userId) => {
 
-   const query = `SELECT * FROM favorites WHERE userId = ${userId}`;
+    const query = `SELECT * FROM favorites WHERE userId = ${userId}`;
 
     const [rows] = await pool.promise().query(query);
 
@@ -37,23 +37,38 @@ export const getFavoriteRecipe = async (userId) => {
  * @param {*} user
  * @returns
  */
-export const addComment = async ({userId, recipe_id, comment}) => {
-    if(userId && recipe_id && comment){
+export const addComment = async ({ userId, recipe_id, comment }) => {
+    if (userId && recipe_id && comment) {
         const query = `INSERT INTO comments (recipe_id, user_id, comment, created_at, updated_at) VALUES (${recipe_id}, ${userId}, '${comment}', NOW(), NOW())`;
- 
+
         const [rows] = await pool.promise().query(query);
-    
+
         return [rows];
     }
-    
- };
+
+};
 /**
  *
  * @param {*} user
  * @returns
  */
-export const getAllRecipe = async ({searchTerm}) => {
-        const query = `SELECT 
+export const likeRecipe = async ({ userId, recipe_id }) => {
+    if (userId && recipe_id) {
+        const query = `INSERT INTO ${"`like`"} (user_id, recipe_id, created_at, updated_at) VALUES (${userId}, ${recipe_id}, NOW(), NOW())`;
+
+        const [rows] = await pool.promise().query(query);
+
+        return [rows];
+    }
+
+};
+/**
+ *
+ * @param {*} user
+ * @returns
+ */
+export const getAllRecipe = async ({ searchTerm }) => {
+    const query = `SELECT 
                             r.id,
                             r.recipe_name_id,
                             rn.recipe_name,
@@ -68,9 +83,9 @@ export const getAllRecipe = async ({searchTerm}) => {
                             recipes_name rn ON r.recipe_name_id = rn.id
                         WHERE rn.recipe_name LIKE '%${searchTerm}%'
                         LIMIT 50;`;
- 
-        const [rows] = await pool.promise().query(query);
-    
-        return [rows];
-    
- };
+
+    const [rows] = await pool.promise().query(query);
+
+    return [rows];
+
+};

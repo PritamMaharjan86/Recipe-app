@@ -246,6 +246,36 @@
                     }
                 }
             }
+        },
+        "/api/recipe/like-recipe": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "Like recipe",
+                        "example": {
+                            "userId": "",
+                            "recipe_id": ""
+                        }
+                    }
+                ],
+                "tags": [
+                    "Recipe"
+                ],
+                "summary": "Like recipe",
+                "responses": {
+                    "200": {
+                        "description": "ok"
+                    }
+                }
+            }
         }
 
     }
