@@ -24,6 +24,11 @@ router.post('/add-comment', recipeController.addComment);
 
 
 /**
+ * POST /recipe/add-comment
+ */
+router.post('/like-recipe', recipeController.likeRecipe);
+
+/**
  * GET /recipe/get-all-recipe
  */
 router.post('/get-all-recipes', recipeController.getAllRecipe);
