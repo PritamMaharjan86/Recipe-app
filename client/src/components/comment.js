@@ -1,42 +1,52 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../components/comment.css"
 import Textarea from '@mui/joy/Textarea';
 import Button from '@mui/material/Button';
 import http from "../pages/http";
 
 
-export default function Comment({data}) {
 
+
+export default function Comment({ recipe_id }) {
     const [comment, setComment] = useState('');
-    const [recipe_id, setRecipe_id] = useState('');
-    const [user_id, setUser_id] = useState('');
+
+   
+    const userId = localStorage.getItem('userId');
 
 
-    console.log('data', data);
-    const handleComment = async () => {
-       
+    const handleChange = (e) => {
+        setComment(e.target.value);
+    }
+    
+
+    const submitComment = async () => {
         try {
             const response = await http.post('/recipe/add-comment',
                 {
                     comment,
-                    user_id,
-                    recipe_id,
+                    userId,
+                    recipe_id
                 });
-
-           
+                console.log('response', response);
+               
 
         } catch (error) {
             console.log(error);
 
         }
+      
+
 
     }
+
+   
 
 
     return (
         <div className='comment_box'>
-            <Textarea className='comment' placeholder="Comment here...." />;
-            <Button className='post' variant="outlined" onClick={handleComment}>Post</Button>
+            <Textarea className='comment' placeholder="Comment here...." onChange={(e)=>handleChange(e)}/>;
+            <Button className='post' variant="outlined" onClick={submitComment}>Post</Button>
+           
         </div>
     )
 }
