@@ -25,6 +25,7 @@ function Login() {
       if (response.data.accessToken) {
         localStorage.setItem('token', response.data.accessToken)
         localStorage.setItem('username', response.data.username)
+        localStorage.setItem('userId', response.data.id);
         setIsLoggedIn(true);
 
       }

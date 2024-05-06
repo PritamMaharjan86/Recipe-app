@@ -17,6 +17,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { colors } from "@mui/material";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -86,7 +87,6 @@ function Home() {
 
   const pages = [];
   const settings = ['Profile', 'Logout'];
-
 
   return (<>
     <ToastContainer />
@@ -194,7 +194,6 @@ function Home() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  {console.log('setting', setting)}
                   {
                     setting === 'Logout' ?
                       <Typography textAlign="center" onClick={handleLogout}>{setting}</Typography>
@@ -270,9 +269,9 @@ function Home() {
                 <div>
                   {data.description.charAt(0).toUpperCase() + data.description.slice(1)}
                 </div>
-              </div>
-
-              <Comment recipe_name_id={data.recipe_name_id} user_id={data.id}/>
+              </div> 
+              <Comment recipe_id={data.id} />
+              <text style={{color:'white', fontSize:'20px'}}>Latest Comment: {data.comment}</text>
             </>
           );
         })}

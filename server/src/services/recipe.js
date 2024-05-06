@@ -77,7 +77,7 @@ export const getAllRecipe = async ({ searchTerm }) => {
                         r.description,
                         r.ingredients,
                         r.image_link,
-                        c.${`comment`},
+                        GROUP_CONCAT(c.${`comment`}, ' ') AS comment,
                         COUNT(l.id) AS likesCount
                     FROM
                         recipes r
@@ -86,7 +86,7 @@ export const getAllRecipe = async ({ searchTerm }) => {
                     LEFT JOIN 
                         comments c ON c.recipe_id = r.id
                     LEFT JOIN
-                        ${`like`} l ON l.recipe_id = r.id
+                        ${"`like`"} l ON l.recipe_id = r.id
                     WHERE rn.recipe_name LIKE '%${searchTerm}%'
                     GROUP BY
                         r.id,
@@ -96,8 +96,7 @@ export const getAllRecipe = async ({ searchTerm }) => {
                         r.steps,
                         r.description,
                         r.ingredients,
-                        r.image_link,
-                        c.${`comment`}
+                        r.image_link
                     LIMIT 50;`;
 
 
