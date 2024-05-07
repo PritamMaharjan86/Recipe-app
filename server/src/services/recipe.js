@@ -62,6 +62,27 @@ export const likeRecipe = async ({ userId, recipe_id }) => {
     }
 
 };
+
+export const addRecipe = async ({ recipe_name, time_to_cook, steps, description, ingredients }) => {
+        const insertRecipeQuery = `INSERT INTO recipes_name (recipe_name, created_at) VALUES ('${recipe_name}', NOW())`;
+
+        const [insertRecipeName] = await pool.promise().query(insertRecipeQuery);
+
+        const insertedId =  insertRecipeName.insertId;
+        if(insertedId){
+            const insertRecipeQ = `INSERT INTO recipes (recipe_name_id, time_to_cook, steps, description, ingredients, created_at) VALUES (${insertedId}, ${time_to_cook}, ${steps}, ${description}, ${ingredients})`;
+
+            const [insertRecipe] = await pool.promise().query(insertRecipeQ);
+
+            return [insertRecipe];
+        }
+
+        return {
+            status : '202',
+            message : 'Oops! Something went wrong while inserting data'
+        }
+
+};
 /**
  *
  * @param {*} user
