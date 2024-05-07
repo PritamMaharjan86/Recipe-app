@@ -33,4 +33,9 @@ router.post('/like-recipe', recipeController.likeRecipe);
  */
 router.post('/get-all-recipes', recipeController.getAllRecipe);
 
+/**
+ * POST /recipe/add-recipe
+ */
+router.post('/add-recipe', recipeController.addRecipe);
+
 export default router;
