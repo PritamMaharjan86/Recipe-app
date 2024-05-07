@@ -79,3 +79,18 @@ export async function likeRecipe(req, res, next) {
         next(err);
     }
 }
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+export async function addRecipe(req, res, next) {
+    try {
+        const data = await recipeService.addRecipe(req.body);
+        return res.status(HttpStatus.OK).json(data);
+    } catch (err) {
+        next(err);
+    }
+}
