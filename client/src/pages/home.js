@@ -17,7 +17,8 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { colors } from "@mui/material";
+import { Button, Icon, Label } from 'semantic-ui-react'
+
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,6 +26,16 @@ function Home() {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   const username = localStorage.getItem('username');
+  const [like, setLike] = useState(false);
+
+
+
+  const handleLike = () =>
+  {
+
+    setLike(true);
+
+  }
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -226,6 +237,7 @@ function Home() {
           onKeyUp={(e) => detectKey(e)}
 
         ></input>
+
         {loading && (
           <div className="blur-background">
             <Loader />
@@ -245,7 +257,6 @@ function Home() {
         {recipes.map((data, index) => {
           return (
             <>
-
               <div className="board" key={index}>
 
                 <span>
@@ -269,9 +280,22 @@ function Home() {
                 <div>
                   {data.description.charAt(0).toUpperCase() + data.description.slice(1)}
                 </div>
-              </div> 
+              </div>
+            
+              <Button as='div' labelPosition='right'>
+      <Button icon onClick={handleLike}>
+        <Icon name='heart' />
+        Like
+      </Button>
+      <Label as='a' basic pointing='left'>
+        like(false);
+      </Label>
+    </Button>
+            
+
               <Comment recipe_id={data.id} />
-              <text style={{color:'white', fontSize:'20px'}}>Latest Comment: {data.comment}</text>
+              <text style={{ color: 'white', fontSize: '20px' }}>Latest Comment: {data.comment}</text>
+
             </>
           );
         })}
@@ -281,5 +305,6 @@ function Home() {
   </>
   );
 }
+
 
 export default Home;
