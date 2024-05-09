@@ -9,7 +9,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
@@ -17,8 +17,16 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Button, Icon, Label } from 'semantic-ui-react'
+// import { Button, Icon, Label } from 'semantic-ui-react'
 
+import AspectRatio from '@mui/joy/AspectRatio';
+import Button from '@mui/joy/Button';
+import Card from '@mui/joy/Card';
+import CardActions from '@mui/joy/CardActions';
+import CardContent from '@mui/joy/CardContent';
+import CardOverflow from '@mui/joy/CardOverflow';
+import Typography from '@mui/joy/Typography';
+import BakeryDiningIcon from '@mui/icons-material/BakeryDining';
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,16 +34,7 @@ function Home() {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([]);
   const username = localStorage.getItem('username');
-  const [like, setLike] = useState(false);
-
-
-
-  const handleLike = () =>
-  {
-
-    setLike(true);
-
-  }
+  const userId = localStorage.getItem('userId');
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -54,17 +53,35 @@ function Home() {
     window.location.reload();
   };
 
+  const handleLike = async (recipe_id) => {
+    try {
+      const response = await http.post('/recipe/like-recipe',
+        {
+          userId,
+          recipe_id,
+        });
+        console.log('response', response);
+
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+
 
   useEffect(() => {
     toast.success("Successfully Logged In");
   }, []);
 
   const handleSubmit = async () => {
+    const userId = localStorage.getItem("userId");
     setLoading(true);
     try {
       const response = await http.post('/recipe/get-all-recipes',
         {
-          searchTerm
+          searchTerm,
+          userId
         });
 
 
@@ -250,51 +267,96 @@ function Home() {
 
       </div>
 
-
       <div className="recipes">
         <h1>Recipes</h1>
 
         {recipes.map((data, index) => {
+          const comments = data.comment && data.comment.split(' ,');
           return (
             <>
-              <div className="board" key={index}>
+              <Card
+                data-resizable
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  width: 800,
+                  overflow: 'auto',
+                  resize: 'horizontal',
+                  '--icon-size': '100px',
+                }}
+              >
+                <CardOverflow variant="solid" style={{ backgroundColor: 'orange' }}>
+                  <AspectRatio
+                    variant="outlined"
+                    color="warning"
+                    ratio="1"
+                    sx={{
+                      m: 'auto',
+                      transform: 'translateY(50%)',
+                      borderRadius: '50%',
+                      width: 'var(--icon-size)',
+                      boxShadow: 'sm',
+                      bgcolor: 'background.surface',
+                      position: 'relative',
 
-                <span>
-                  <h2>{data.recipe_name.toUpperCase()} </h2>
-                </span>
-                <br />
-                <h2>Ingredients</h2>
-                <div>
+                    }}
+                  >
+                    <div>
+                      <BakeryDiningIcon color="warning" sx={{ fontSize: '4rem', color: 'orange' }} />
+                    </div>
+                  </AspectRatio>
+                </CardOverflow>
+                <Typography level="title-lg" sx={{ mt: 'calc(var(--icon-size) / 2)' }}>
+                  {data.recipe_name.toUpperCase()}
+                </Typography>
+                <CardContent sx={{ maxWidth: '80ch' }}>
+                  {data.description.charAt(0).toUpperCase() + data.description.slice(1)}
+                </CardContent>
+                <h3>Steps</h3>
+                <CardContent sx={{ maxWidth: '80ch' }}>
+                  {data.steps.slice(1, -1).split(",").map((i, index) => (
+                    <li key={index}>{i}</li>
+                  ))}
+                </CardContent>
+                <h3>Ingredients</h3>
+                <CardContent sx={{ maxWidth: '80ch' }}>
                   {data.ingredients.slice(1, -1).split(",").map((i, index) => (
                     <li key={index}>{i}</li>
                   ))}
-                </div>
-                <br />
-                <h2>Instructions </h2>
-                {data.steps.slice(1, -1).split(",").map((i, index) => (
-                  <li key={index}>{i}</li>
-                ))}
-                <br />
-                <br />
-                <h2>Description</h2>
-                <div>
-                  {data.description.charAt(0).toUpperCase() + data.description.slice(1)}
-                </div>
-              </div>
-            
-              <Button as='div' labelPosition='right'>
-      <Button icon onClick={handleLike}>
-        <Icon name='heart' />
-        Like
-      </Button>
-      <Label as='a' basic pointing='left'>
-        like(false);
-      </Label>
-    </Button>
-            
+                </CardContent>
+                <CardActions
+                  orientation="vertical"
+                  buttonFlex={1}
+                  sx={{
 
-              <Comment recipe_id={data.id} />
-              <text style={{ color: 'white', fontSize: '20px' }}>Latest Comment: {data.comment}</text>
+                    '--Button-radius': '40px',
+                    width: 'clamp(min(100%, 160px), 50%, min(100%, 200px))',
+
+                  }}
+                >
+
+                  <Button variant="solid" style={{ backgroundColor: 'orange' }} onClick={()=>handleLike(data.id)}>
+                    LIKE
+                  </Button>
+
+                  <h3>Comments</h3>
+                  <CardContent className="comment-section">
+                    {
+                      comments && comments.map((comment) => {
+                        return (
+                          <text style={{ textAlign: "left" }}><h3>{username}:</h3> {comment}<br /></text>
+                        )
+                      })
+                    }
+                  </CardContent>
+
+                  <Comment recipe_id={data.id} />
+                </CardActions>
+              </Card><br />
+
 
             </>
           );
