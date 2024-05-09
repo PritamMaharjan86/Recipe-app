@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import "../components/comment.css"
-import Textarea from '@mui/joy/Textarea';
+import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import http from "../pages/http";
+import Box from '@mui/material/Box';
 
 
 
@@ -10,14 +11,14 @@ import http from "../pages/http";
 export default function Comment({ recipe_id }) {
     const [comment, setComment] = useState('');
 
-   
+
     const userId = localStorage.getItem('userId');
 
 
     const handleChange = (e) => {
         setComment(e.target.value);
     }
-    
+
 
     const submitComment = async () => {
         try {
@@ -27,26 +28,40 @@ export default function Comment({ recipe_id }) {
                     userId,
                     recipe_id
                 });
-                console.log('response', response);
-               
+            console.log('response', response);
+
 
         } catch (error) {
             console.log(error);
 
         }
-      
+
 
 
     }
 
-   
+
 
 
     return (
-        <div className='comment_box'>
-            <Textarea className='comment' placeholder="Comment here...." onChange={(e)=>handleChange(e)}/>;
+
+        <Box
+            component="form"
+            sx={{
+                '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+
+            <TextField className="comment" label="Comment here..." variant="filled"  onChange={(e) => handleChange(e)}/>
             <Button className='post' variant="outlined" onClick={submitComment}>Post</Button>
-           
-        </div>
-    )
+
+        </Box>
+        // <div className='comment_box'>
+        //     <TextField className='comment' placeholder="Comment here...." onChange={(e) => handleChange(e)} />
+        //     <Button className='post' variant="outlined" onClick={submitComment}>Post</Button>
+
+        // </div>
+    );
 }
