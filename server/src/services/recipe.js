@@ -88,7 +88,7 @@ export const addRecipe = async ({ recipe_name, time_to_cook, steps, description,
  * @param {*} user
  * @returns
  */
-export const getAllRecipe = async ({ searchTerm }) => {
+export const getAllRecipe = async ({ searchTerm, userId }) => {
     const query = `SELECT 
                         r.id,
                         r.recipe_name_id,
@@ -105,9 +105,11 @@ export const getAllRecipe = async ({ searchTerm }) => {
                         LEFT JOIN
                         recipes_name rn ON r.recipe_name_id = rn.id
                     LEFT JOIN 
-                        comments c ON c.recipe_id = r.id
+                        comments c ON c.recipe_id = r.id AND c.user_id = ${userId}
                     LEFT JOIN
-                        ${"`like`"} l ON l.recipe_id = r.id
+                        ${"`like`"} l ON l.recipe_id = r.id AND l.user_id = ${userId}
+                    LEFT JOIN
+                        users u on u.id = ${userId}
                     WHERE rn.recipe_name LIKE '%${searchTerm}%'
                     GROUP BY
                         r.id,

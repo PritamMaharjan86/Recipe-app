@@ -74,3 +74,11 @@ h1{
   margin-top: 5px;
   
 }
+
+.recipes{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
