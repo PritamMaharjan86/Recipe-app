@@ -60,7 +60,7 @@ function Home() {
           userId,
           recipe_id,
         });
-        console.log('response', response);
+      console.log('response', response);
 
 
     } catch (error) {
@@ -315,18 +315,20 @@ function Home() {
                 <CardContent sx={{ maxWidth: '80ch' }}>
                   {data.description.charAt(0).toUpperCase() + data.description.slice(1)}
                 </CardContent>
-                <h3>Steps</h3>
-                <CardContent sx={{ maxWidth: '80ch' }}>
-                  {data.steps.slice(1, -1).split(",").map((i, index) => (
-                    <li key={index}>{i}</li>
-                  ))}
-                </CardContent>
+
                 <h3>Ingredients</h3>
                 <CardContent sx={{ maxWidth: '80ch' }}>
                   {data.ingredients.slice(1, -1).split(",").map((i, index) => (
                     <li key={index}>{i}</li>
                   ))}
                 </CardContent>
+                <h3>Steps</h3>
+                <CardContent sx={{ maxWidth: '80ch' }}>
+                  {data.steps.slice(1, -1).split(",").map((i, index) => (
+                    <li key={index}>{i}</li>
+                  ))}
+                </CardContent>
+
                 <CardActions
                   orientation="vertical"
                   buttonFlex={1}
@@ -338,7 +340,7 @@ function Home() {
                   }}
                 >
 
-                  <Button variant="solid" style={{ backgroundColor: 'orange' }} onClick={()=>handleLike(data.id)}>
+                  <Button variant="solid" style={{ backgroundColor: 'orange' }} onClick={() => handleLike(data.id)}>
                     LIKE
                   </Button>
 
