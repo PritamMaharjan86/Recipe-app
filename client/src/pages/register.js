@@ -9,6 +9,7 @@ import { FaUser } from 'react-icons/fa';
 export default function Register() {
 
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,6 +17,11 @@ export default function Register() {
     const handleUsername = (e) => {
         setUsername(e.target.value);
         console.log('username:', username);
+    }
+
+    const handleEmail= (e) => {
+        setEmail(e.target.value);
+        console.log('email:', email);
     }
 
     const handlePassword = (e) => {
@@ -27,7 +33,7 @@ export default function Register() {
         e.preventDefault();
 
         try {
-            const response = await http.post('/auth/create-user', { username, password });
+            const response = await http.post('/auth/create-user', { username, password, email });
             console.log(response);
             setIsLoggedIn(true);
 
@@ -61,6 +67,7 @@ export default function Register() {
 
                         <h1>Register Here</h1>
 
+                        <div><input className='email_register' placeholder='📧 Email' type='text' onChange={handleEmail}></input></div>
                         <div><input className='name_register' placeholder='👤 Username' type='text' onChange={handleUsername}></input></div>
                         <div><input className='password_register' placeholder='🔒 Create password' type='password' onChange={handlePassword}></input></div>
                         <div><button className='register_button' type='submit' onClick={handleSubmit}>Register</button></div>

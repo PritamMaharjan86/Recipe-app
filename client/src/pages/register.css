@@ -16,6 +16,21 @@
   background-image: url("https://res.cloudinary.com/dvmumi2mb/image/upload/v1712205907/samples/chair-and-coffee-table.jpg");
   background-size: cover;
 }
+.email_register {
+  height: 30px;
+  width: 70%;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.email_register::placeholder
+{
+    color: rgba(3, 3, 3, 0.7);
+}
+ 
+
 .name_register {
   height: 30px;
   width: 70%;
