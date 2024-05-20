@@ -2,6 +2,7 @@ CREATE TABLE `recipe_app`.`users` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(500) NULL,
     `password` VARCHAR(1000) NULL,
+    `email` VARCHAR(225) NULL,
     `created_at` DATETIME NULL,
     `updated_at` DATETIME NULL,
     PRIMARY KEY (`id`)
