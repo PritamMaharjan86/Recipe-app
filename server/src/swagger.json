@@ -42,7 +42,8 @@
                         "description": "Username/Password for the new user.",
                         "example": {
                             "username": "",
-                            "password": ""
+                            "password": "",
+                            "email": ""
                         }
                     }
                 ],
