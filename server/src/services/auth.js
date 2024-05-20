@@ -14,11 +14,13 @@ import AuthenticationError from '../errors/authentication.js';
  */
 export const createUser = async (user) => {
     const checkUsernameQuery = `SELECT username FROM users where username = '${user.username}'`;
+    const checkEmailQuery = `SELECT email FROM users where email = '${user.email}'`;
 
     const [checkUsername] = await pool.promise().query(checkUsernameQuery);
+    const [checkEmail] = await pool.promise().query(checkEmailQuery);
 
-    if (!checkUsername.length) {
-        if (user.username && user.password) {
+    if (!checkUsername.length && !checkEmail.length) {
+        if (user.username && user.password && user.email) {
             return new Promise((resolve, reject) => {
                 return bcrypt.hash(user.password, 5, async (err, hash) => {
                     if (err) {
@@ -34,14 +36,16 @@ export const createUser = async (user) => {
               username,
               password,
               created_at,
-              updated_at
+              updated_at,
+              email
             )
             VALUES
             (
               ${mysql.escape(user.username)},
               ${mysql.escape(hash)},
               ${mysql.escape(dateTime)},
-              ${mysql.escape(dateTime)}
+              ${mysql.escape(dateTime)},
+              ${mysql.escape(user.email)}
             );`;
                     const [result] = await pool.promise().query(query);
                     return resolve(result.insertId);
@@ -49,8 +53,17 @@ export const createUser = async (user) => {
             });
         }
     } else {
-        throw new AuthenticationError('Username already exists.');
+
+        if (checkEmail.length) {
+            throw new AuthenticationError('email already exists.');
+
+        }
+        else {
+            throw new AuthenticationError('user already exists.');
+        }
+
     }
+
 };
 
 export const login = async (user) => {
