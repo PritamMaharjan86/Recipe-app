@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import "./register.css";
 import http from "../pages/http";
 import { resolvePath, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaUser } from 'react-icons/fa';
+
 
 export default function Register() {
 
@@ -13,15 +13,25 @@ export default function Register() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const [isValid, setIsValid] = useState(true);
+    const emailRef = useRef(null);
+
 
     const handleUsername = (e) => {
         setUsername(e.target.value);
         console.log('username:', username);
+
     }
 
-    const handleEmail= (e) => {
+    const handleEmail = (e) => {
         setEmail(e.target.value);
         console.log('email:', email);
+        if (emailRegex.test(email)) {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
+        }
     }
 
     const handlePassword = (e) => {
@@ -31,17 +41,26 @@ export default function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!isValid || email === '') {
+            // If the email is not valid, focus on the email input
+            emailRef.current.focus();
+        } else {
 
-        try {
-            const response = await http.post('/auth/create-user', { username, password, email });
-            console.log(response);
-            setIsLoggedIn(true);
+            try {
 
-        } catch (error) {
-            toast.error(error.response.data.error.message); //path to get data from api
-            console.error(error.response);
+                const response = await http.post('/auth/create-user', { username, password, email });
+                console.log(response);
+                setIsLoggedIn(true);
 
+
+
+            } catch (error) {
+                toast.error(error.response.data.error.message); //path to get data from api
+                console.error(error.response);
+
+            }
         }
+
     };
 
 
@@ -67,7 +86,7 @@ export default function Register() {
 
                         <h1>Register Here</h1>
 
-                        <div><input className='email_register' placeholder='📧 Email' type='text' onChange={handleEmail}></input></div>
+                        <div>{!isValid && email && <p style={{ color: 'red' , fontSize:'20px'}}>Invalid email address</p>}<input className='email_register' placeholder='📧 Email ' type='text' onChange={handleEmail} ref={emailRef}></input></div>
                         <div><input className='name_register' placeholder='👤 Username' type='text' onChange={handleUsername}></input></div>
                         <div><input className='password_register' placeholder='🔒 Create password' type='password' onChange={handlePassword}></input></div>
                         <div><button className='register_button' type='submit' onClick={handleSubmit}>Register</button></div>
