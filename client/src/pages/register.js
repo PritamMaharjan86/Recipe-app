@@ -86,10 +86,12 @@ export default function Register() {
 
                         <h1>Register Here</h1>
 
-                        <div>{!isValid && email && <p style={{ color: 'red' , fontSize:'20px'}}>Invalid email address</p>}<input className='email_register' placeholder='📧 Email ' type='text' onChange={handleEmail} ref={emailRef}></input></div>
+                        <div>{!isValid && email && <p style={{ color: 'red', fontSize: '20px' }}>Invalid email address</p>}<input className='email_register' placeholder='📧 Email ' type='text' onChange={handleEmail} ref={emailRef}></input></div>
                         <div><input className='name_register' placeholder='👤 Username' type='text' onChange={handleUsername}></input></div>
                         <div><input className='password_register' placeholder='🔒 Create password' type='password' onChange={handlePassword}></input></div>
                         <div><button className='register_button' type='submit' onClick={handleSubmit}>Register</button></div>
+
+
 
                     </div>
 
